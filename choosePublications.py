@@ -66,6 +66,6 @@ while True:
         if field_id > 36: break
 
 savable.drop_duplicates(['doi'], inplace=True)
-savable.to_csv('savable.csv', index=False)
+savable.to_csv('./csvFiles/savable.csv', index=False)
 
-savable['doi'].to_csv('doi.csv', index=False)
+savable['doi'].to_csv('./csvFiles/doi.csv', index=False)

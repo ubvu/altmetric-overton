@@ -20,4 +20,4 @@ overton_data = pd.DataFrame(columns=['doi', 'title', 'docs'])
 
 while url :
     url = url_reader(url)
-overton_data.to_csv('overton_data.csv', index=False)
+overton_data.to_csv('./csvFiles/overton_data.csv', index=False)

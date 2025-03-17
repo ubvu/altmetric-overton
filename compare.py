@@ -2,16 +2,15 @@ import pandas as pd
 import ast
 
 
-savable = pd.read_csv("savable.csv", encoding='utf-8')
-altmetric = pd.read_csv("Altmetric.csv", encoding='utf-8')
+savable = pd.read_csv("csvFiles/savable.csv", encoding='utf-8')
+altmetric = pd.read_csv("csvFiles/Altmetric.csv", encoding='utf-8')
 '''
 altmetric is the only file where the doi doesn't start with https://doi.org/, so merges on doi wouldn't work.
 hence we add https://doi.org/ 
 '''
 altmetric['DOI'] = altmetric['DOI'].apply(lambda x: "https://doi.org/" + str(x) if x else x)
-print(altmetric['DOI'].head(5))
 
-overton = pd.read_csv("overton_data.csv", encoding='utf-8')
+overton = pd.read_csv("csvFiles/overton_data.csv", encoding='utf-8')
 '''
 overton data has not been split into columns, so we have to do that here.
 add overton to the column name to make the final merge more intelligible.
@@ -34,4 +33,4 @@ overton.rename(columns={'title': 'overton_title'}, inplace=True)
 middle = pd.merge(savable, altmetric, how='left', left_on='doi', right_on='DOI')
 final = pd.merge(middle, overton, how='left', on='doi')
 
-final.to_csv("final.csv", index=False)
+final.to_csv("./csvFiles/final.csv", index=False)
